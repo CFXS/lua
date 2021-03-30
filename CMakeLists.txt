@@ -5,10 +5,9 @@ exec_program(py ARGS "\"${CMAKE_SOURCE_DIR}/Tools/GenerateSources.py\" \"${ROOT_
 include("${ROOT_DIR}/_Sources.cmake")
 
 add_library(${EXE_NAME} STATIC ${headers} ${sources})
+target_compile_definitions(${EXE_NAME} PRIVATE "_CRT_SECURE_NO_WARNINGS")
 
 if(MSVC)
   target_compile_options(${EXE_NAME} PRIVATE "/MP")
 endif()
-
-target_link_libraries(${EXE_NAME} PRIVATE project_options project_warnings)
 
